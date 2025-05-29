@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter using HTML</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        #error-msg{
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="padding: 10px;margin-left: 20px;">
+        <div class="heading">
+            <h1 style="color: white;">Counter using HTML</h1>
+        </div>
+        <div class="counter-value">
+            <p style="color: white;" id="counter-text">Your Current Count is: 0</p>
+        </div>
+        <div class="button">
+            <button type="button" style="background-color: white; color: black; padding: 10px;" id="decrement" onclick="handleDecrement()">Decrement</button>
+            <button type="button" style="background-color: white; color: black; padding: 10px;" id="increment" onclick="handleIncrement()">Increment</button>
+            <button type="button" style="background-color: black; color: white; padding: 10px;" id="clear" onclick="handleClear()">Clear</button>
+        </div>
+        <p id="error-msg"></p>
+    </div>
+
+    <script>
+       const  countText = document.getElementById('counter-text');
+       const decrementBtn = document.getElementById('decrement');
+       const incrementBtn = document.getElementById('increment');
+       const clearBtn = document.getElementById('clear');
+       const error = document.getElementById('error-msg');
+      
+       let count = 0;
+       function updateCounter(){
+        countText.textContent = `Your Current Count is: ${count}`
+       }
+
+       function handleDecrement(){
+         if(count === 0){
+            error.textContent = 'Error: Cannot go below 0';
+            clearBtn.style.display = 'none';
+         }else{
+            count--
+            updateCounter();
+            error.textContent = '';
+            clearBtn.style.display = 'inline-block'
+         }
+        
+       }
+
+       function handleIncrement(){
+         count++;
+         updateCounter();
+         clearBtn.style.display = 'inline-block';
+         error.textContent = '';
+       }
+
+       function handleClear(){
+        if(count === 0){
+            clearBtn.style.display = 'none';
+        }else{
+            count = 0;
+            updateCounter();
+        }
+       }
+       if(count === 0){
+        clearBtn.style.display = 'none';
+       }
+    </script>
+</body>
+</html>
